@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Registry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .api-section {
+            margin: 40px 0;
+        }
+        
+        .api-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .endpoint {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .endpoint h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            margin: 10px 10px 10px 0;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .button:hover {
+            background: #5568d3;
+        }
+        
+        .server-list {
+            margin: 20px 0;
+        }
+        
+        .server-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: box-shadow 0.3s;
+        }
+        
+        .server-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .server-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .server-card .description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .server-card .meta {
+            font-size: 0.9em;
+            color: #999;
+        }
+        
+        .server-card a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .server-card a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        #serverCount {
+            font-weight: bold;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 MCP Registry</h1>
+            <p>Model Context Protocol Server Registry</p>
+        </header>
+        
+        <div class="content">
+            <div class="intro">
+                <h2>Welcome to the MCP Registry</h2>
+                <p>This registry provides a centralized catalog of Model Context Protocol (MCP) servers. MCP is an open protocol that enables seamless integration between LLM applications and external data sources and tools.</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number" id="serverCount">0</div>
+                    <div class="label">Registered Servers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">∞</div>
+                    <div class="label">Possibilities</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">100%</div>
+                    <div class="label">Open Source</div>
+                </div>
+            </div>
+            
+            <div class="api-section">
+                <h2>📡 API Endpoints</h2>
+                
+                <div class="endpoint">
+                    <h3>Get Registry Data (JSON)</h3>
+                    <p>Access the complete registry data in JSON format:</p>
+                    <div class="code-block">GET https://krishnabalan2014.github.io/mcp_registry/registry.json</div>
+                    <button class="button" onclick="viewJSON()">View JSON</button>
+                    <button class="button" onclick="downloadJSON()">Download JSON</button>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>Example Response Format</h3>
+                    <div class="code-block">[
+  {
+    "name": "example-server",
+    "description": "Example MCP server description",
+    "repository": "https://github.com/user/repo",
+    "version": "1.0.0",
+    "packages": [
+      {
+        "registry": "npm",
+        "name": "example-package",
+        "version": "1.0.0",
+        "command": "npx"
+      }
+    ]
+  }
+]</div>
+                </div>
+            </div>
+            
+            <div class="api-section">
+                <h2>📦 Available Servers</h2>
+                <p>Currently registered MCP servers in this registry:</p>
+                <div id="serverList" class="server-list">
+                    <p style="text-align: center; color: #999; padding: 40px;">Loading servers...</p>
+                </div>
+            </div>
+            
+            <div class="api-section">
+                <h2>🔧 How to Use</h2>
+                <div class="endpoint">
+                    <h3>For Client Applications</h3>
+                    <p>To fetch the registry in your MCP client:</p>
+                    <div class="code-block">fetch('https://krishnabalan2014.github.io/mcp_registry/registry.json')
+  .then(response => response.json())
+  .then(data => console.log(data));</div>
+                </div>
+                
+                <div class="endpoint">
+                    <h3>For Server Publishers</h3>
+                    <p>To add your MCP server to this registry, please submit a pull request with your server details in the <code>registry.json</code> file.</p>
+                    <a href="https://github.com/krishnabalan2014/mcp_registry" class="button">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 MCP Registry | <a href="https://github.com/krishnabalan2014/mcp_registry" style="color: #667eea;">GitHub</a></p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.7;">Learn more about the Model Context Protocol at <a href="https://modelcontextprotocol.io" style="color: #667eea;">modelcontextprotocol.io</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Load and display registry data
+        async function loadRegistry() {
+            try {
+                const response = await fetch('./registry.json');
+                if (!response.ok) {
+                    throw new Error('Registry not found');
+                }
+                const data = await response.json();
+                displayServers(data);
+                document.getElementById('serverCount').textContent = data.length;
+            } catch (error) {
+                console.error('Error loading registry:', error);
+                document.getElementById('serverList').innerHTML = 
+                    '<div class="server-card"><p style="text-align: center; color: #999;">No servers registered yet. Registry data will be available at <code>registry.json</code></p></div>';
+                document.getElementById('serverCount').textContent = '0';
+            }
+        }
+        
+        function displayServers(servers) {
+            const serverList = document.getElementById('serverList');
+            if (servers.length === 0) {
+                serverList.innerHTML = '<p style="text-align: center; color: #999;">No servers registered yet.</p>';
+                return;
+            }
+            
+            serverList.innerHTML = servers.map(server => `
+                <div class="server-card">
+                    <h3>${escapeHtml(server.name || 'Unnamed Server')}</h3>
+                    <p class="description">${escapeHtml(server.description || 'No description available')}</p>
+                    <div class="meta">
+                        ${server.version ? `<span>Version: ${escapeHtml(server.version)}</span> | ` : ''}
+                        ${server.repository ? `<a href="${escapeHtml(server.repository)}" target="_blank">Repository</a>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function viewJSON() {
+            window.open('./registry.json', '_blank');
+        }
+        
+        function downloadJSON() {
+            fetch('./registry.json')
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'registry.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    alert('Error downloading registry: ' + error.message);
+                });
+        }
+        
+        // Load registry on page load
+        document.addEventListener('DOMContentLoaded', loadRegistry);
+    </script>
+</body>
+</html>
