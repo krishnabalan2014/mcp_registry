@@ -1,0 +1,19 @@
+[
+  {
+    "name": "io.github.example/sample-mcp-server",
+    "description": "A sample MCP server for demonstration purposes. This server provides basic functionality to showcase the Model Context Protocol.",
+    "repository": "https://github.com/example/sample-mcp-server",
+    "version": "1.0.0",
+    "packages": [
+      {
+        "registry": "npm",
+        "name": "sample-mcp-server",
+        "version": "1.0.0",
+        "command": "npx",
+        "arguments": [
+          "sample-mcp-server"
+        ]
+      }
+    ]
+  }
+]
