@@ -319,7 +319,7 @@
                     <p class="description">${escapeHtml(server.description || 'No description available')}</p>
                     <div class="meta">
                         ${server.version ? `<span>Version: ${escapeHtml(server.version)}</span> | ` : ''}
-                        ${server.repository ? `<a href="${escapeHtml(server.repository)}" target="_blank">Repository</a>` : ''}
+                        ${server.repository ? `<a href="${escapeHtml(server.repository)}" target="_blank" rel="noopener noreferrer">Repository</a>` : ''}
                     </div>
                 </div>
             `).join('');
